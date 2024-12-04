@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+      {
+        "source": "/v1",
+        "destination": "https://b7ac-49-207-214-186.ngrok-free.app"
+      }
+    ]
+  }
