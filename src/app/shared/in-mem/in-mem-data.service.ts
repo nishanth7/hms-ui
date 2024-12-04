@@ -13,18 +13,18 @@ class JWT {
     const refreshTokenExpiresIn = 86400;
 
     return filterObject({
-      access_token: this.createToken(user, expiresIn),
-      token_type: 'bearer',
-      expires_in: user.refresh_token ? expiresIn : undefined,
-      refresh_token: user.refresh_token ? this.createToken(user, refreshTokenExpiresIn) : undefined,
+      accessToken: this.createToken(user, expiresIn),
+      tokenType: 'bearer',
+      expiresIn: user.refreshToken ? expiresIn : undefined,
+      refreshToken: user.refreshToken ? this.createToken(user, refreshTokenExpiresIn) : undefined,
     });
   }
 
   getUser(req: HttpRequest<any>) {
     let token = '';
 
-    if (req.body?.refresh_token) {
-      token = req.body.refresh_token;
+    if (req.body?.refreshToken) {
+      token = req.body.refreshToken;
     } else if (req.headers.has('Authorization')) {
       const authorization = req.headers.get('Authorization');
       const result = (authorization as string).split(' ');
@@ -42,7 +42,7 @@ class JWT {
   }
 
   createToken(user: User, expiresIn = 0) {
-    const exp = user.refresh_token ? currentTimestamp() + expiresIn : undefined;
+    const exp = user.refreshToken ? currentTimestamp() + expiresIn : undefined;
 
     return [
       base64.encode(JSON.stringify({ typ: 'JWT', alg: 'HS256' })),
@@ -100,7 +100,7 @@ export class InMemDataService implements InMemoryDbService {
       name: 'recca0120',
       email: 'recca0120@gmail.com',
       avatar: './assets/images/avatars/avatar-10.jpg',
-      refresh_token: true,
+      refreshToken: true,
     },
   ];
 

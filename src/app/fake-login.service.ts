@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
  */
 @Injectable()
 export class FakeLoginService extends LoginService {
-  private token = { access_token: 'MW56YjMyOUAxNjMuY29tWm9uZ2Jpbg==', token_type: 'bearer' };
+  private token = { accessToken: 'MW56YjMyOUAxNjMuY29tWm9uZ2Jpbg==', tokenType: 'bearer' };
 
   login() {
     return of(this.token);

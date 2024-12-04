@@ -42,15 +42,16 @@ export class LoginComponent {
       .subscribe(
         () => this.router.navigateByUrl('/'),
         (errorRes: HttpErrorResponse) => {
-          if (errorRes.status === 422) {
-            const form = this.loginForm;
-            const errors = errorRes.error.errors;
-            Object.keys(errors).forEach(key => {
-              form.get(key === 'email' ? 'username' : key)?.setErrors({
-                remote: errors[key][0],
-              });
-            });
-          }
+          this.router.navigateByUrl('/')
+          // if (errorRes.status === 422) {
+          //   const form = this.loginForm;
+          //   const errors = errorRes.error.errors;
+          //   Object.keys(errors).forEach(key => {
+          //     form.get(key === 'email' ? 'username' : key)?.setErrors({
+          //       remote: errors[key][0],
+          //     });
+          //   });
+          // }
           this.isSubmitting = false;
         }
       );

@@ -5,6 +5,7 @@ import { TokenService } from './token.service';
 import { LoginService } from './login.service';
 import { filterObject, isEmptyObject } from './helpers';
 import { User } from './interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class AuthService {
     share()
   );
 
-  constructor(private loginService: LoginService, private tokenService: TokenService) {}
+  constructor(private loginService: LoginService, private tokenService: TokenService, private router: Router) {}
 
   init() {
     return new Promise<void>(resolve => this.change$.subscribe(() => resolve()));
@@ -39,10 +40,16 @@ export class AuthService {
       map(() => this.check())
     );
   }
+  register(username: any, password: any) {
+    return this.loginService.register(username, password).pipe(
+      tap(token => this.tokenService.set(token)),
+      map(() => this.check())
+    );
+  }
 
   refresh() {
     return this.loginService
-      .refresh(filterObject({ refresh_token: this.tokenService.getRefreshToken() }))
+      .refresh(filterObject({ refreshToken: this.tokenService.getRefreshToken() }))
       .pipe(
         catchError(() => of(undefined)),
         tap(token => this.tokenService.set(token)),
@@ -50,8 +57,8 @@ export class AuthService {
       );
   }
 
-  logout() {
-    return this.loginService.logout().pipe(
+  logout(email: any) {
+    return this.loginService.logout(email).pipe(
       tap(() => this.tokenService.clear()),
       map(() => !this.check())
     );

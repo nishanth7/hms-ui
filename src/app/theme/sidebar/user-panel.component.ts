@@ -6,7 +6,7 @@ import { AuthService, User } from '@core/authentication';
   selector: 'app-user-panel',
   template: `
     <div class="matero-user-panel">
-      <img class="matero-user-panel-avatar" [src]="user.avatar" alt="avatar" width="64" />
+  <!--    <img class="matero-user-panel-avatar" [src]="user.avatar" alt="avatar" width="64" /> -->
       <h4 class="matero-user-panel-name">{{ user.name }}</h4>
       <h5 class="matero-user-panel-email">{{ user.email }}</h5>
       <div class="matero-user-panel-icons">
@@ -24,7 +24,7 @@ import { AuthService, User } from '@core/authentication';
         >
           <mat-icon class="icon-18">edit</mat-icon>
         </button>
-        <button mat-icon-button (click)="logout()" matTooltip="{{ 'logout' | translate }}">
+        <button mat-icon-button (click)="logout(user.email)" matTooltip="{{ 'logout' | translate }}">
           <mat-icon class="icon-18">exit_to_app</mat-icon>
         </button>
       </div>
@@ -42,7 +42,7 @@ export class UserPanelComponent implements OnInit {
     this.auth.user().subscribe(user => (this.user = user));
   }
 
-  logout() {
-    this.auth.logout().subscribe(() => this.router.navigateByUrl('/auth/login'));
+  logout(email: any) {
+    this.auth.logout(email).subscribe(() => this.router.navigateByUrl('/auth/login'));
   }
 }

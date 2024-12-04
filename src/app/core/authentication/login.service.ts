@@ -10,23 +10,29 @@ import { map } from 'rxjs/operators';
 export class LoginService {
   constructor(protected http: HttpClient) {}
 
+  register(username: string, password: string, rememberMe = false) {
+    return this.http.post<Token>('/v1/auth/register', { email: username, password });
+  }
+
   login(username: string, password: string, rememberMe = false) {
-    return this.http.post<Token>('/auth/login', { username, password, rememberMe });
+    return this.http.post<Token>('/v1/auth/login', { email: username, password });
   }
 
   refresh(params: Record<string, any>) {
-    return this.http.post<Token>('/auth/refresh', params);
+    return this.http.post<Token>('/v1/auth/refresh-token', params);
   }
 
-  logout() {
-    return this.http.post<any>('/auth/logout', {});
+  logout(email: any) {
+    return this.http.post<any>('/v1/auth/logout', { email});
   }
 
   me() {
-    return this.http.get<User>('/me');
+    return this.http.get<User>('/v1/users/profile');
   }
 
   menu() {
-    return this.http.get<{ menu: Menu[] }>('/me/menu').pipe(map(res => res.menu));
+    return this.http
+      .get<{ menu: Menu[] }>('assets/data/menu.json?_t=' + Date.now())
+      .pipe(map(res => res.menu));
   }
 }

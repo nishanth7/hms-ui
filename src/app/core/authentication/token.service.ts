@@ -11,7 +11,7 @@ import { currentTimestamp, filterObject } from './helpers';
   providedIn: 'root',
 })
 export class TokenService implements OnDestroy {
-  private key = 'ng-matero-token';
+  private key = 'nishanth-translator';
 
   private change$ = new BehaviorSubject<BaseToken | undefined>(undefined);
   private refresh$ = new Subject<BaseToken | undefined>();
@@ -58,7 +58,7 @@ export class TokenService implements OnDestroy {
   }
 
   getRefreshToken(): string | void {
-    return this.token?.refresh_token;
+    return this.token?.refreshToken;
   }
 
   ngOnDestroy(): void {
@@ -71,8 +71,8 @@ export class TokenService implements OnDestroy {
     if (!token) {
       this.store.remove(this.key);
     } else {
-      const value = Object.assign({ access_token: '', token_type: 'Bearer' }, token, {
-        exp: token.expires_in ? currentTimestamp() + token.expires_in : null,
+      const value = Object.assign({ accessToken: '', tokenType: 'Bearer' }, token.token, {
+        exp: token.token.expiresIn ? currentTimestamp() + token.token.expiresIn : null,
       });
       this.store.set(this.key, filterObject(value));
     }

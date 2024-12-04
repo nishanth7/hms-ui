@@ -59,7 +59,7 @@ describe('StartupService', () => {
 
     await startup.load();
 
-    tokenService.set({ access_token: 'token', token_type: 'bearer' });
+    tokenService.set({ accessToken: 'token', tokenType: 'bearer' });
 
     httpMock.expectOne('/me').flush(admin);
     httpMock.expectOne('/me/menu').flush(menuData);
@@ -77,7 +77,7 @@ describe('StartupService', () => {
 
     await startup.load();
 
-    tokenService.set({ access_token: '', token_type: 'bearer' });
+    tokenService.set({ accessToken: '', tokenType: 'bearer' });
 
     httpMock.expectNone('/me/menu');
 

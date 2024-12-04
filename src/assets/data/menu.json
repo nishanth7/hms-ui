@@ -1,8 +1,8 @@
 {
   "menu": [
     {
-      "route": "dashboard",
-      "name": "dashboard",
+      "route": "projects",
+      "name": "Projects",
       "type": "link",
       "icon": "dashboard",
       "badge": {

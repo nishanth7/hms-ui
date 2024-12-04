@@ -29,7 +29,7 @@ export class TokenInterceptor implements HttpInterceptor {
       }
 
       if (this.router.url.includes('/auth/login')) {
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/projects');
       }
     };
 

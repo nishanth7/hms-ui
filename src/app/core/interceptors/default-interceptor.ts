@@ -16,7 +16,7 @@ export class DefaultInterceptor implements HttpInterceptor {
   constructor(private toast: ToastrService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!req.url.includes('/api/')) {
+    if (!req.url.includes('/v1/')) {
       return next.handle(req);
     }
 
