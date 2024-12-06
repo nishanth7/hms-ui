@@ -38,6 +38,7 @@
     "ngx-progressbar": "^9.0.0",
     "ngx-toastr": "^16.0.2",
     "photoviewer": "^3.6.6",
+    "primeng": "^15.4.1",
     "rxjs": "~7.8.0",
     "screenfull": "^6.0.2",
     "tslib": "^2.3.0",

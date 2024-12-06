@@ -2,7 +2,7 @@
 
 const PROXY_CONFIG = {
   '/v1/**': {
-    target: 'https://b7ac-49-207-214-186.ngrok-free.app',
+    target: 'http://localhost:3000',
     changeOrigin: true,
     secure: false,
     logLevel: 'debug',

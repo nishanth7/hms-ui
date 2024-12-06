@@ -15,7 +15,8 @@ import { debounceTime, tap } from 'rxjs/operators';
     <mat-menu #menu="matMenu">
       <button routerLink="/profile/overview" mat-menu-item>
         <mat-icon>account_circle</mat-icon>
-        <span>{{ 'profile' | translate }}</span>
+    <!--    <span>{{ 'profile' | translate }}</span>-->
+          {{ user.name }}
       </button>
       <button routerLink="/profile/settings" mat-menu-item>
         <mat-icon>edit</mat-icon>
@@ -54,7 +55,9 @@ export class UserComponent implements OnInit {
     this.auth
       .user()
       .pipe(
-        tap(user => (this.user = user)),
+        tap(user => (
+          this.user = user
+        )),
         debounceTime(10)
       )
       .subscribe(() => this.cdr.detectChanges());

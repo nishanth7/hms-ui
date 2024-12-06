@@ -7,4 +7,12 @@
   height: 40px;
 }
 
+.p-dropdown-label {
+  padding-top: 0px !important;
+}
+
+.p-dropdown {
+  height: 2em !important;
+}
+
 /*# sourceMappingURL=header.component.css.map */
